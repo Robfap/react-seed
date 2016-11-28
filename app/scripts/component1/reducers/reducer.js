@@ -1,5 +1,4 @@
 import * as actionTypes from '../constants/actionTypes';
-import _ from 'lodash';
 
 const initialState = {
     counter: 0
@@ -8,10 +7,7 @@ const initialState = {
 let Reducer = {};
 
 Reducer[actionTypes.TYPE_1] = function (store) {
-    const newStore = _.cloneDeep(store);
-    newStore.counter++;
-
-    return newStore;
+    return Object.assign({}, store, {counter: store.counter + 1});
 };
 
 Reducer[actionTypes.TYPE_2] = () => {

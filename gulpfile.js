@@ -13,6 +13,8 @@ var cleanCSS = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
 var envify = require('envify/custom');
 var gutil = require('gulp-util');
+var Server = require('karma').Server;
+
 
 var paths = {
     app: __dirname + '/app',
@@ -121,7 +123,24 @@ gulp.task('apply-prod-environment', function() {
     process.env.NODE_ENV = 'production';
 });
 
+gulp.task('test', function (done) {
+    var doneCallback = function (exitCode) {
+        if (exitCode !== 0) {
+            gutil.log('Karma exited with code ' + gutil.colors.red(String(exitCode)));
+        }
+
+        done();
+    };
+
+    return new Server({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    }, doneCallback).start();
+});
+
 gulp.task('default', ['connect', 'babelify', 'watch']);
+
+
 
 
 /*
