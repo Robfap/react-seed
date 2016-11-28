@@ -1,10 +1,8 @@
 import * as actionTypes from '../constants/actionTypes';
 
-export function action1 (name, value) {
+export function action1 () {
     return {
-        type: actionTypes.TYPE_1,
-        name,
-        value
+        type: actionTypes.TYPE_1
     }
 }
 
