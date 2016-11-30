@@ -6,10 +6,21 @@ import { Link } from 'react-router';
 const Comp1 = React.createClass({
     render: function () {
         return (
-            <div>
+            <div style={{padding: '20px'}}>
                 <div>Component1</div>
-                <button type="submit" onClick={this.props.onClick} >click me</button>
-                <div>{this.props.counter}</div>
+                <button
+                    onClick={this.props.onClick}
+                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                    click me {this.props.counter}
+                </button>
+
+                <button
+                    onClick={this.props.onClick}
+                    className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    click me {this.props.counter}
+                </button>
+
+                <div></div>
                 <Link to="/about">About</Link>
             </div>
         )

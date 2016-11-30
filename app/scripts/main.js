@@ -12,6 +12,8 @@ import Comp1 from './component1/containers/container.jsx';
 import About from './about';
 import {API_ROOT} from './general/constants/constants';
 
+import 'material.js';
+
 let middlewares = [apiMiddleware, thunk];
 
 if (process.env.NODE_ENV !== "production") {

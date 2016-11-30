@@ -15,7 +15,6 @@ var envify = require('envify/custom');
 var gutil = require('gulp-util');
 var Server = require('karma').Server;
 
-
 var paths = {
     app: __dirname + '/app',
     build: __dirname + '/build',
@@ -68,7 +67,11 @@ gulp.task('css:modify', function () {
 });
 
 gulp.task('babelify', function() {
-  return browserify(paths.app + paths.scripts + '/main.js', {debug: true})
+  return browserify({
+      entries: paths.app + paths.scripts + '/main.js',
+      debug: true,
+      paths: ['./node_modules/material-design-lite/']
+  })
     .transform("babelify", {
       presets: ["es2015", "react"],
       plugins: ["transform-object-rest-spread"]
@@ -78,10 +81,14 @@ gulp.task('babelify', function() {
           PLATFORM: gutil.env.platform
       }))
     .bundle()
+      // adding scripts for material design
+
     .pipe(source(paths.bundleJs))
+  //  .pipe(concat('./node_modules/material-design-lite/material.js'))
     .pipe(gulp.dest(paths.app + '/dist'))
     .pipe(connect.reload());
 });
+
 
 gulp.task('rebuild:scripts', ['babelify'], function () {
     return gulp
